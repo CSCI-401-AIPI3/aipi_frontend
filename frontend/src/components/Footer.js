@@ -8,10 +8,7 @@ function Copyright() {
       style={{ flex: "auto", margin: "auto" }}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://chainfuse.io/">
-        AIPI3
-      </Link>{" "}
-      {new Date().getFullYear()}
+      <Link color="inherit">AIPI3</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );

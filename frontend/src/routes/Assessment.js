@@ -1,6 +1,7 @@
 import { Button, Container, Typography } from "@mui/material";
 import { MultiSelectQuestion } from "../components/MultiSelectQuestion";
 import { SingleSelectQuestion } from "../components/SingleSelectQuestion";
+import { Link } from "react-router-dom";
 
 export function Assessment() {
   const categoriesList = [
@@ -149,7 +150,11 @@ export function Assessment() {
         Hello and welcome to the assessment page
       </Typography>
       {categoryComponents}
-      <Button>Submit</Button>
+      <Button>
+        <Link style={{ textDecoration: "none", color: "gray" }} to={"/profile"}>
+          Submit
+        </Link>
+      </Button>
     </Container>
   );
 }

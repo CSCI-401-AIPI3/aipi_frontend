@@ -11,10 +11,10 @@ import {
 export function SingleSelectQuestion({ props }) {
   return (
     <Container sx={{ my: 4 }}>
+      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
+        {props.questionString}
+      </Typography>
       <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">
-          {props.questionString}
-        </FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue="female"
