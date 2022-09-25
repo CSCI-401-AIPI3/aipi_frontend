@@ -13,8 +13,16 @@ export function Assessment() {
     "Tools",
     "People",
     "Processes",
-    "InfrastructureFit",
+    "Infrastructure Fit",
   ];
+
+  fetch("/getAllQuestions")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+
+  fetch("/getUserAnswers")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 
   const questionsList = [
     {
@@ -109,7 +117,7 @@ export function Assessment() {
     },
     {
       id: 9,
-      category: "InfrastructureFit",
+      category: "Infrastructure Fit",
       questionString: "Is there a long engineering backlog?",
       answerType: "singleChoice",
       answerOptionsList: [
@@ -123,26 +131,20 @@ export function Assessment() {
   let categoryComponents = [];
 
   categoriesList.forEach((category, index) => {
-    categoryComponents.push(<Typography>{category}</Typography>);
+    categoryComponents.push(<Typography variant="h5">{category}</Typography>);
 
-    console.log("processing cat" + category);
     const categoryQuestions = questionsList.filter(
       (question) => question.category === category
     );
 
     categoryQuestions.forEach((question) => {
-      console.log(question);
       if (question.answerType === "singleChoice") {
         categoryComponents.push(<SingleSelectQuestion props={question} />);
       } else if (question.answerType === "multipleChoice") {
         categoryComponents.push(<MultiSelectQuestion props={question} />);
       }
     });
-
-    console.log("length of components " + categoryComponents.length);
   });
-
-  console.log(categoryComponents);
 
   return (
     <Container sx={{ my: 4 }}>
