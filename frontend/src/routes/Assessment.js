@@ -16,13 +16,13 @@ export function Assessment() {
     "Infrastructure Fit",
   ];
 
-  fetch("/getAllQuestions")
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+  // fetch("/getAllQuestions")
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data));
 
-  fetch("/getUserAnswers")
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+  // fetch("/getUserAnswers")
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data));
 
   const questionsList = [
     {
