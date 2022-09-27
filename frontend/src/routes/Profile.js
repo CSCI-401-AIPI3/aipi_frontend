@@ -57,7 +57,7 @@ export function Profile() {
       <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
         Hello and welcome your profile
       </Typography>
-      <Typography>
+      <Typography pb={4}>
         Below, you can find a chart of your organization's progress over time.
         It is important to consider both individual growth in specific
         categories as well as holistic growth across all categories.
