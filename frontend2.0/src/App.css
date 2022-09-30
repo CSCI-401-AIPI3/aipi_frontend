@@ -1,0 +1,48 @@
+.App {
+  padding-left: 325px;
+  padding-right: 325px;
+  
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  color: black;
+}
+
+.form-sub-header{
+  align-items: left;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  
+}
+.sub-header-title{
+  font-size: 20pt;
+}
+
+.sub-header-subtext{
+  font-size: 12pt;
+}
+
+.spacer{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
