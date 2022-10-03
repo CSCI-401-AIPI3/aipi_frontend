@@ -20,12 +20,13 @@ export function SingleSelectQuestion({ props }) {
           defaultValue="female"
           name="radio-buttons-group"
         >
-          {props.answerOptionsList.map((answer) => {
+          {props.answerOptionsList.map((answer, i) => {
             return (
               <FormControlLabel
                 value={answer}
                 control={<Radio />}
                 label={answer}
+                key={i}
               />
             );
           })}

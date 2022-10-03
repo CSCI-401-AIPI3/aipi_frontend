@@ -16,9 +16,12 @@ export function Assessment() {
     "Infrastructure Fit",
   ];
 
-  // fetch("/getAllQuestions")
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
+  fetch("http://localhost:3008/questions")
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => console.log(data));
 
   // fetch("/getUserAnswers")
   //   .then((response) => response.json())
@@ -137,7 +140,7 @@ export function Assessment() {
       (question) => question.category === category
     );
 
-    categoryQuestions.forEach((question) => {
+    categoryQuestions.forEach((question, i) => {
       if (question.answerType === "singleChoice") {
         categoryComponents.push(<SingleSelectQuestion props={question} />);
       } else if (question.answerType === "multipleChoice") {

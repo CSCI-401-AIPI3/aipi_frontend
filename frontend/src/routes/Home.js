@@ -72,7 +72,7 @@ export function Home() {
           </Grid>
         </Grid>
       </Grid>
-      <Button variant="contained" te>
+      <Button variant="contained">
         <Link
           style={{ textDecoration: "none", color: "white" }}
           to={"/assessment"}
