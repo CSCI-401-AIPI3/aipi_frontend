@@ -11,11 +11,15 @@ import CardMedia from '@mui/material/CardMedia';
 
 export function Home() {
   return (
-    <Container style={{marginTop: '10px', }}>
-      <Typography sx={{ mb: 4 }} variant="h2" align="center">
+    <Container style={{marginTop: '20px', }}>
+      <Typography sx={{ mb: 1  }} variant="h2" align="center">
         Welcome to AIPI3® Technical Maturity Assessment
       </Typography>
-      <Divider />
+      <Divider pt={5}/>
+      <div>
+        <img src="/images/homelogo.webp"/>
+      </div>
+      <Divider pt={10}/>
       <Typography pt={5} variant="h3" align="center" color="textPrimary" gutterBottom>
         What is it?
       </Typography>
@@ -24,65 +28,193 @@ export function Home() {
         technology not only in terms of what technical problems your team is
         aware of but also how technology is thought about.
       </Typography>
-      <div>
-        <img src="/images/homelogo.webp"/>
-      </div>
 
-      <Typography variant="h5" pt={10} align="center" color="textSecondary" paragraph>
-        Based on your assessment, your company will be placed in one of 6
-        levels:
-        Your company will be assessed through 6 different technologies, 
+
+      <Typography variant="h4" pt={5} align="center" color="textSecondary" paragraph>
+
+        Your company will be assessed through 9 different technologies, each with specific weights, 
+        to give a hollistic view of progress.
       </Typography>
 
-      <div>
-        <Card sx={{ maxWidth: 400 }}>
-          <CardMedia
-            component="img"
-            height="200"
-            image="/images/homelogo.webp"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div" align="center">
-              Frontend
-            </Typography>
-            <Typography variant="body2" color="text.secondary" align="center">
-              Completing the assessment will also result in an AIPI3 consulting
-              professional reach out to you to help
-            </Typography>
-          </CardContent>
-        </Card> <Card sx={{ maxWidth: 400 }}>
-          <CardMedia
-            component="img"
-            height="200"
-            image="/images/homelogo.webp"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div" align="center">
-              Backend
-            </Typography>
-            <Typography variant="body2" color="text.secondary" align="center">
-              Completing the assessment will also result in an AIPI3 consulting
-              professional reach out to you to help
-            </Typography>
-          </CardContent>
-        </Card>
-      </div>
+      <Grid container spacing={4}>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Frontend
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Backend
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Networking
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Security
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Data and Machine Learning
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Tools
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                People
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Processes
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={4}>
+          <Card sx={{ maxWidth: 400 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image="/images/homelogo.webp"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div" align="center">
+                Infrastucture Problem Fit
+              </Typography>
+              <Typography variant="body2" color="text.secondary" align="center">
+                Completing the assessment will also result in an AIPI3 consulting
+                professional reach out to you to help
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      
       
 
-      <Divider />
-      <Typography variant="body1" pb={2} align="center" color="textSecondary" paragraph>
-        By creating an account, you can return to the assessment at any time and
-        update it with progress.
-      </Typography>
-      <Typography variant="body1" pb={2} align="center" color="textSecondary" paragraph>
-        Completing the assessment will also result in an AIPI3 consulting
-        professional reach out to you to help personally aid in your company's
-        technical maturity process.
+      <Divider/>
+
+      <Typography variant="h4" pt={4}pb={4} align="center" color="textSecondary" paragraph>
+        Completing the assessment will also allow one of our own consulting professionals
+        to reach and aid your company's technical maturity process.
+     
       </Typography>
       <div align="center">
         <Button align= "center" variant="contained" size="large">
           <Link
-            style={{ textDecoration: "none", color: "white" }}
+            style={{ textDecoration: "none", color: "white", fontSize:"2rem"}}
             to={"/assessment"}
           >
             Take the assessment
