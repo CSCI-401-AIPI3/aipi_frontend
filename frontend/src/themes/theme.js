@@ -4,6 +4,12 @@ import { components } from "./components.js";
 const { palette } = createTheme({
   palette: {
     divider: "#e6e8f0",
+    background:{
+      paper: 'white'
+    },
+    text: {
+      font: 'helvetica'
+    }
   },
 });
 

@@ -17,23 +17,25 @@ export function AppBar(props) {
       {...other}
     >
       <Toolbar>
-        <Typography sx={{ fontSize: "1.5rem", flexGrow: 1 }} variant="h1">
-          <Link style={{ textDecoration: "none", color: "gray" }} to={"/"}>
+        <Typography sx={{ fontSize: "1.5rem", flexGrow: 1}} variant="h1">
+          <Link style={{ textDecoration: "none", color: "gray"}} to={"/"}>
             AIPI3
           </Link>
         </Typography>
 
-        <Typography>
-          <Button
-            fullWidth
-            variant="text"
-            style={{ textDecoration: "none", color: "gray" }}
-          >
+        <Typography sx={{ fontSize: "1.5rem", flexGrow: 1}} variant="h1"> 
+          <Button>
             <Link
               style={{ textDecoration: "none", color: "gray" }}
-              to={"/profile"}
+              to={"/"}
             >
-              Profile
+              Home
+            </Link>
+            <Link
+              style={{ textDecoration: "none", color: "gray" }}
+              to={"login"}
+            >
+              Login
             </Link>
           </Button>
         </Typography>
