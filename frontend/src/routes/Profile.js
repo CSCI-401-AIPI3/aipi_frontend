@@ -10,8 +10,21 @@ import {
   Bar,
   Line,
 } from "recharts";
+import { useState, useEffect } from "react";
 
 export function Profile() {
+  let isLoggedIn = false;
+
+  useEffect(() => {
+    isLoggedIn = fetch("http://localhost:3008/")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data.success;
+      });
+  });
+
   // fetch("/getUserScores")
   //   .then((response) => response.json())
   //   .then((data) => console.log(data));
@@ -52,10 +65,10 @@ export function Profile() {
 
   finalReformattedData.sort((a, b) => a.name - b.name);
 
-  return (
-    <Container sx={{ my: 4 }}>
+  const loggedInView = (
+    <>
       <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
-        Hello and welcome your profile
+        Hello and welcome to your profile
       </Typography>
       <Typography pb={4}>
         Below, you can find a chart of your organization's progress over time.
@@ -81,6 +94,17 @@ export function Profile() {
           Edit your assessment answers
         </Link>
       </Button>
-    </Container>
+    </>
   );
+
+  const loggedOutView = (
+    <Link style={{ textDecoration: "none", color: "gray" }} to={"/login"}>
+      Please log in to view the assessment
+    </Link>
+  );
+
+  // render categoryComponents only if the user is logged in
+  const assessmentBody = isLoggedIn ? loggedInView : loggedOutView;
+
+  return <Container sx={{ my: 4 }}>{assessmentBody}</Container>;
 }

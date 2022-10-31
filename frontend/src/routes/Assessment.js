@@ -2,8 +2,21 @@ import { Button, Container, Typography } from "@mui/material";
 import { MultiSelectQuestion } from "../components/MultiSelectQuestion";
 import { SingleSelectQuestion } from "../components/SingleSelectQuestion";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export function Assessment() {
+  let isLoggedIn = false;
+
+  useEffect(() => {
+    isLoggedIn = fetch("http://localhost:3008/")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data.success;
+      });
+  });
+
   const categoriesList = [
     "Frontend",
     "Backend",
@@ -16,12 +29,12 @@ export function Assessment() {
     "Infrastructure Fit",
   ];
 
-  fetch("http://localhost:3008/questions")
-    .then((response) => {
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => console.log(data));
+  // fetch("http://localhost:3008/questions")
+  //   .then((response) => {
+  //     console.log(response);
+  //     return response.json();
+  //   })
+  //   .then((data) => console.log(data));
 
   // fetch("/getUserAnswers")
   //   .then((response) => response.json())
@@ -134,7 +147,11 @@ export function Assessment() {
   let categoryComponents = [];
 
   categoriesList.forEach((category, index) => {
-    categoryComponents.push(<Typography variant="h5">{category}</Typography>);
+    categoryComponents.push(
+      <Typography variant="h5" key={index}>
+        {category}
+      </Typography>
+    );
 
     const categoryQuestions = questionsList.filter(
       (question) => question.category === category
@@ -149,17 +166,32 @@ export function Assessment() {
     });
   });
 
-  return (
-    <Container sx={{ my: 4 }}>
-      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
-        Hello and welcome to the assessment page
-      </Typography>
+  const loggedInView = (
+    <>
       {categoryComponents}
       <Button>
         <Link style={{ textDecoration: "none", color: "gray" }} to={"/profile"}>
           Submit
         </Link>
       </Button>
+    </>
+  );
+
+  const loggedOutView = (
+    <Link style={{ textDecoration: "none", color: "gray" }} to={"/login"}>
+      Please log in to view the assessment
+    </Link>
+  );
+
+  // render categoryComponents only if the user is logged in
+  const assessmentBody = isLoggedIn ? loggedInView : loggedOutView;
+
+  return (
+    <Container sx={{ my: 4 }}>
+      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
+        Hello and welcome to the assessment page
+      </Typography>
+      {assessmentBody}
     </Container>
   );
 }

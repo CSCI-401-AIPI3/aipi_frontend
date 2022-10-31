@@ -9,12 +9,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 const theme = createTheme();
-const testUser = {
-  temail: "t@test.com",
-  tpassword: "123",
-};
 
-export function Login() {
+export function Signup() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,7 +19,7 @@ export function Login() {
       password: data.get("password"),
     });
 
-    fetch("http://localhost:3008/login", {
+    fetch("http://localhost:3008/register", {
       method: "POST",
       body: JSON.stringify({
         email: data.get("email"),
@@ -48,7 +44,7 @@ export function Login() {
           }}
         >
           <Typography component="h1" variant="h3">
-            Sign in
+            Sign up
           </Typography>
           <Box
             component="form"
@@ -82,14 +78,14 @@ export function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
           </Box>
           <Link
             style={{ textDecoration: "none", color: "white", fontSize: "2rem" }}
-            to={"/signup"}
+            to={"/login"}
           >
-            Don't have an account? Sign up here
+            Already have an account? Log in here
           </Link>
         </Box>
       </Container>
