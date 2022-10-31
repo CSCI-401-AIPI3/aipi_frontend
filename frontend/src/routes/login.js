@@ -13,6 +13,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
+const testUser = {
+  temail:"t@test.com",
+  tpassword: "123"
+}
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -22,6 +26,10 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    console.log({
+
+    })
+
   };
 
   return (

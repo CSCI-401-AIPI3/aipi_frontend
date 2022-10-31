@@ -9,7 +9,8 @@ const { palette } = createTheme({
     },
     text: {
       font: 'helvetica'
-    }
+    },
+
   },
 });
 

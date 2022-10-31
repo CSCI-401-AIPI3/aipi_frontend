@@ -10,8 +10,11 @@ import { Profile } from "./routes/Profile.js";
 import { Assessment } from "./routes/Assessment.js";
 import { AppBar } from "./components/AppBar.js";
 import { Footer } from "./components/Footer.js";
+import axios from "axios";
 
 function App() {
+
+  
   const testUser = {
     email:"t@test.com",
     password: "123"
@@ -25,7 +28,7 @@ function App() {
       <Toolbar />
       <Routes>
         <Route exact path="/" element={<React.Suspense children={<Home />} />} />
-        <Route path="/assessment" element={<React.Suspense children={<Assessment />} />}/>
+        {/* <Route path="/assessment" element={<React.Suspense children={<Assessment />} />}/> */}
         <Route path="/login" element={<React.Suspense children={<Login />} />}/>
         <Route path="/profile" element={<React.Suspense children={<Profile />} />}
         />
