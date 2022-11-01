@@ -11,17 +11,22 @@ import {
   Line,
 } from "recharts";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function Profile() {
-  let isLoggedIn = false;
+  let [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    isLoggedIn = fetch("http://localhost:3008/")
-      .then((response) => {
-        return response.json();
+    axios
+      .get("http://localhost:3008/", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       })
-      .then((data) => {
-        return data.success;
+      .then((response) => {
+        console.log(response);
+        setLoggedIn(response.status === 200);
       });
   });
 

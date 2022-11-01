@@ -11,12 +11,10 @@ import { AppBar } from "./components/AppBar.js";
 import { Footer } from "./components/Footer.js";
 import { Login } from "./routes/Login.js";
 import { Signup } from "./routes/Signup";
+import axios from "axios";
 
 function App() {
-  const testUser = {
-    email: "t@test.com",
-    password: "123",
-  };
+  axios.defaults.withCredentials = true;
 
   return (
     <ThemeProvider theme={theme}>

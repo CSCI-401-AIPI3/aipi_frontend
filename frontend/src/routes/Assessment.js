@@ -3,17 +3,22 @@ import { MultiSelectQuestion } from "../components/MultiSelectQuestion";
 import { SingleSelectQuestion } from "../components/SingleSelectQuestion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function Assessment() {
-  let isLoggedIn = false;
+  let [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    isLoggedIn = fetch("http://localhost:3008/")
-      .then((response) => {
-        return response.json();
+    axios
+      .get("http://localhost:3008/", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       })
-      .then((data) => {
-        return data.success;
+      .then((response) => {
+        console.log(response);
+        setLoggedIn(response.status === 200);
       });
   });
 
@@ -184,6 +189,7 @@ export function Assessment() {
   );
 
   // render categoryComponents only if the user is logged in
+  console.log("isloggedin", isLoggedIn);
   const assessmentBody = isLoggedIn ? loggedInView : loggedOutView;
 
   return (

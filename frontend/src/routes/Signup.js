@@ -7,28 +7,48 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const theme = createTheme();
 
 export function Signup() {
+  const [createdAccount, setCreatedAccount] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const passData = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
 
-    fetch("http://localhost:3008/register", {
-      method: "POST",
-      body: JSON.stringify({
-        email: data.get("email"),
-        password: data.get("password"),
-      }),
-    }).then((response) => {
-      return response.json();
-    });
+    axios
+      .post("http://localhost:3008/register", passData, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        console.log(response.status);
+        if (response.status === 200) {
+          setCreatedAccount(true);
+        }
+        return response;
+      });
   };
+
+  const proceedButton = createdAccount ? (
+    <Button variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Link
+        style={{ textDecoration: "none", color: "white", fontSize: "1rem" }}
+        to={"/assessment"}
+      >
+        Take the Assessment
+      </Link>
+    </Button>
+  ) : null;
 
   return (
     <ThemeProvider theme={theme}>
@@ -82,11 +102,12 @@ export function Signup() {
             </Button>
           </Box>
           <Link
-            style={{ textDecoration: "none", color: "white", fontSize: "2rem" }}
+            style={{ textDecoration: "none", color: "gray", fontSize: "1rem" }}
             to={"/login"}
           >
             Already have an account? Log in here
           </Link>
+          {proceedButton}
         </Box>
       </Container>
     </ThemeProvider>
