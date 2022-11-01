@@ -11,8 +11,8 @@ import axios from "axios";
 
 const theme = createTheme();
 
-export function Login() {
-  const [signedInAccount, setSignedInAccount] = React.useState(false);
+export function Signup() {
+  const [createdAccount, setCreatedAccount] = React.useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,21 +23,23 @@ export function Login() {
     };
 
     axios
-      .post("http://localhost:3008/login", passData, {
+      .post("http://localhost:3008/register", passData, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
       })
       .then((response) => {
+        console.log(response);
+        console.log(response.status);
         if (response.status === 200) {
-          setSignedInAccount(true);
+          setCreatedAccount(true);
         }
-        return response.json();
+        return response;
       });
   };
 
-  const proceedButton = signedInAccount ? (
+  const proceedButton = createdAccount ? (
     <Button variant="contained" sx={{ mt: 3, mb: 2 }}>
       <Link
         style={{ textDecoration: "none", color: "white", fontSize: "1rem" }}
@@ -62,7 +64,7 @@ export function Login() {
           }}
         >
           <Typography component="h1" variant="h3">
-            Sign in
+            Sign up
           </Typography>
           <Box
             component="form"
@@ -96,14 +98,14 @@ export function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
           </Box>
           <Link
             style={{ textDecoration: "none", color: "gray", fontSize: "1rem" }}
-            to={"/signup"}
+            to={"/login"}
           >
-            Don't have an account? Sign up here
+            Already have an account? Log in here
           </Link>
           {proceedButton}
         </Box>
