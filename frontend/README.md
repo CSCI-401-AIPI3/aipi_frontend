@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Todo
+
+Update navbar in response to auth:
+https://stackoverflow.com/questions/71960194/update-navbar-after-success-login-or-logout-redirection
+
 ## Available Scripts
 
 In the project directory, you can run:

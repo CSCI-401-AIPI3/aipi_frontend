@@ -1,13 +1,4 @@
-body {
-    margin: 0;
-    font-family: Helvetica, arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #e5f3fc;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
+#root {
+  height: 100vh;
+  width: 100vw;
+}

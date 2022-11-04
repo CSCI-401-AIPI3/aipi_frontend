@@ -3,8 +3,26 @@ import { MultiSelectQuestion } from "../components/MultiSelectQuestion";
 import { SingleSelectQuestion } from "../components/SingleSelectQuestion";
 import { Link } from "react-router-dom";
 import ExpandingCard from "../components/ExpandingCard";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function Assessment() {
+  let [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3008/", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setLoggedIn(response.status === 200);
+      });
+  });
+
   const categoriesList = [
     "Frontend",
     "Backend",
@@ -17,12 +35,12 @@ export function Assessment() {
     "Infrastructure Fit",
   ];
 
-  fetch("http://localhost:3008/questions")
-    .then((response) => {
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => console.log(data));
+  // fetch("http://localhost:3008/questions")
+  //   .then((response) => {
+  //     console.log(response);
+  //     return response.json();
+  //   })
+  //   .then((data) => console.log(data));
 
     //data is the struct, so check console log to figure out struct questions
 
@@ -137,7 +155,11 @@ export function Assessment() {
   let categoryComponents = [];
 
   categoriesList.forEach((category, index) => {
-    categoryComponents.push(<Typography variant="h5">{category}</Typography>);
+    categoryComponents.push(
+      <Typography variant="h5" key={index}>
+        {category}
+      </Typography>
+    );
 
     const categoryQuestions = questionsList.filter(
       (question) => question.category === category
@@ -152,18 +174,33 @@ export function Assessment() {
     });
   });
 
-  return (
-    <Container sx={{ my: 4 }}>
-      <ExpandingCard></ExpandingCard>
-      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
-        Hello and welcome to the assessment page
-      </Typography>
+  const loggedInView = (
+    <>
       {categoryComponents}
       <Button>
         <Link style={{ textDecoration: "none", color: "gray" }} to={"/profile"}>
           Submit
         </Link>
       </Button>
+    </>
+  );
+
+  const loggedOutView = (
+    <Link style={{ textDecoration: "none", color: "gray" }} to={"/login"}>
+      Please log in to view the assessment
+    </Link>
+  );
+
+  // render categoryComponents only if the user is logged in
+  console.log("isloggedin", isLoggedIn);
+  const assessmentBody = isLoggedIn ? loggedInView : loggedOutView;
+
+  return (
+    <Container sx={{ my: 4 }}>
+      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
+        Hello and welcome to the assessment page
+      </Typography>
+      {assessmentBody}
     </Container>
   );
 }
