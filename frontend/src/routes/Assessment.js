@@ -2,6 +2,7 @@ import { Button, Container, Typography } from "@mui/material";
 import { MultiSelectQuestion } from "../components/MultiSelectQuestion";
 import { SingleSelectQuestion } from "../components/SingleSelectQuestion";
 import { Link } from "react-router-dom";
+import ExpandingCard from "../components/ExpandingCard";
 
 export function Assessment() {
   const categoriesList = [
@@ -22,6 +23,8 @@ export function Assessment() {
       return response.json();
     })
     .then((data) => console.log(data));
+
+    //data is the struct, so check console log to figure out struct questions
 
   // fetch("/getUserAnswers")
   //   .then((response) => response.json())
@@ -151,6 +154,7 @@ export function Assessment() {
 
   return (
     <Container sx={{ my: 4 }}>
+      <ExpandingCard></ExpandingCard>
       <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
         Hello and welcome to the assessment page
       </Typography>

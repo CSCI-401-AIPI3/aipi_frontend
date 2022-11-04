@@ -10,6 +10,7 @@ import { Profile } from "./routes/Profile.js";
 import { Assessment } from "./routes/Assessment.js";
 import { AppBar } from "./components/AppBar.js";
 import { Footer } from "./components/Footer.js";
+import ExpandingCard from "./components/ExpandingCard";
 
 function App() {
   return (
