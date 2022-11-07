@@ -22,7 +22,7 @@ export function Home() {
       }}
     >
       <Typography
-        sx={{ mb: 1, fontFamily: "League Spartan" }}
+        sx={{ mb: 1, fontFamily: "Helvetica" }}
         variant="h2"
         align="center"
       >
@@ -37,47 +37,60 @@ export function Home() {
           alignItems: "stretch",
           gridTemplateColumns: "1fr",
           background: "../../images/homelogo.webp",
+          paddingBottom: "2%"
         }}
         component="header"
       >
         <CardMedia
-          sx={{ gridArea: "1/1/2/2", height: 250 }}
+          sx={{ gridArea: "1/1/2/2", height: 500 }}
           image="../../images/homelogo.webp"
         />
         <Container sx={{ gridArea: "1/1/2/2" }}>...</Container>
       </Box>
       <Divider pt={10} />
-      <Typography
-        sx={{ fontWeight: "bold" }}
-        pt={5}
-        variant="h3"
-        align="center"
-        color="textPrimary"
-        gutterBottom
-      >
-        What is it?
-      </Typography>
-      <Typography
-        sx={{ fontWeight: "10", marginBottom: "40px" }}
-        variant="h4"
-        align="center"
-        color="textSecondary"
-        paragraph
-      >
-        This assessment will help guide future advances in your company's
-        technology not only in terms of what technical problems your team is
-        aware of but also how technology is thought about. Your company will be
-        assessed through 9 different technologies, each with specific weights,
-        to give a hollistic view of progress.
-      </Typography>
 
-      <Grid container spacing={4} backgroundColor="#E6F3FC">
+      <Box
+          sx={{
+            display: "grid",
+            justifyItems: "stretch",
+            alignItems: "stretch",
+            gridTemplateColumns: "1fr",
+            backgroundColor: "black",
+          }}
+          component="header"
+        >
+        <Typography
+          sx={{ fontWeight: "bold" }}
+          pt={5}
+          variant="h3"
+          align="center"
+          color="white"
+          gutterBottom
+        >
+        
+          What is it?
+        </Typography>
+        <Typography
+          sx={{ fontWeight: "10", marginBottom: "40px" }}
+          variant="h4"
+          align="center"
+          color="white"
+          paragraph
+        >
+          This assessment will help guide future advances in your company's
+          technology not only in terms of what technical problems your team is
+          aware of but also how technology is thought about. Your company will be
+          assessed through 9 different technologies, each with specific weights,
+          to give a hollistic view of progress.
+        </Typography>
+      </Box>
+      <Grid container spacing={4} sx={{paddingTop:"2%"}}>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401frontend.jpg"
             />
             <CardContent>
               <Typography
@@ -90,17 +103,17 @@ export function Home() {
                 Frontend
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-                Analyzes the forward facing user interfaces.
+                Analyzes forward facing user interfaces.
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401backend.jpg"
             />
             <CardContent>
               <Typography
@@ -111,19 +124,18 @@ export function Home() {
               >
                 Backend
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+                Asseses test coverage and backend computations
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401networking.jpg"
             />
             <CardContent>
               <Typography
@@ -134,19 +146,18 @@ export function Home() {
               >
                 Networking
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+                Checks integrity of both wireless and wired networks
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401security.jpg"
             />
             <CardContent>
               <Typography
@@ -157,19 +168,18 @@ export function Home() {
               >
                 Security
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+                Investigates cybersecurity and user account access
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400 , backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401machinelearning.jpg"
             />
             <CardContent>
               <Typography
@@ -180,19 +190,18 @@ export function Home() {
               >
                 Data and Machine Learning
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+                Analyzes how data is cleansed and accessed by users
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401tools.jpg"
             />
             <CardContent>
               <Typography
@@ -203,19 +212,18 @@ export function Home() {
               >
                 Tools
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+                Assesses team management techniques
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401people.jpg"
             />
             <CardContent>
               <Typography
@@ -226,19 +234,18 @@ export function Home() {
               >
                 People
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+               Investigates employee knowledge and firm hierarchy
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401process.jpg"
             />
             <CardContent>
               <Typography
@@ -249,19 +256,18 @@ export function Home() {
               >
                 Processes
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+              Focuses on people and team engagements in HR
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 }}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
             <CardMedia
               component="img"
               height="250"
-              image="/images/homelogo.webp"
+              image="/images/401infrastructure.jpg"
             />
             <CardContent>
               <Typography
@@ -272,9 +278,8 @@ export function Home() {
               >
                 Infrastucture Problem Fit
               </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Completing the assessment will also result in an AIPI3
-                consulting professional reach out to you to help
+              <Typography variant="h5" color="text.secondary" align="center">
+                Analyses synergy between business practices and customer needs
               </Typography>
             </CardContent>
           </Card>
