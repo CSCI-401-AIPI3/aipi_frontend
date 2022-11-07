@@ -26,37 +26,13 @@ export function Home() {
         variant="h2"
         align="center"
       >
-        Welcome to AIPI3® Technical Maturity Assessment
+        Welcome to the AIPI3® Technical Maturity Assessment
       </Typography>
       <Divider pt={5} />
-
-      <Box
-        sx={{
-          display: "grid",
-          justifyItems: "stretch",
-          alignItems: "stretch",
-          gridTemplateColumns: "1fr",
-          background: "../../images/homelogo.webp",
-        }}
-        component="header"
-      >
-        <CardMedia
-          sx={{ gridArea: "1/1/2/2", height: 250 }}
-          image="../../images/homelogo.webp"
-        />
-        <Container sx={{ gridArea: "1/1/2/2" }}>...</Container>
-      </Box>
+      <div>
+        <img src="/images/homelogo.webp" />
+      </div>
       <Divider pt={10} />
-      <Typography
-        sx={{ fontWeight: "bold" }}
-        pt={5}
-        variant="h3"
-        align="center"
-        color="textPrimary"
-        gutterBottom
-      >
-        What is it?
-      </Typography>
       <Typography
         sx={{ fontWeight: "10", marginBottom: "40px" }}
         variant="h4"
@@ -70,9 +46,22 @@ export function Home() {
         assessed through 9 different technologies, each with specific weights,
         to give a hollistic view of progress.
       </Typography>
-
-      <Grid container spacing={4} backgroundColor="#E6F3FC">
-        <Grid item md={4}>
+      <div align="center">
+        <Button align="center" variant="contained" size="large">
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "white",
+              fontSize: "1.5rem",
+            }}
+            to={"/assessment"}
+          >
+            Take the assessment
+          </Link>
+        </Button>
+      </div>
+      <Grid container m={2} p={2} backgroundColor="#E6F3FC">
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -95,7 +84,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -118,7 +107,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -141,7 +130,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -164,7 +153,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -187,7 +176,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -210,7 +199,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -233,7 +222,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -256,7 +245,7 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} p={2}>
           <Card sx={{ maxWidth: 400 }}>
             <CardMedia
               component="img"
@@ -285,6 +274,7 @@ export function Home() {
 
       <Typography
         variant="h4"
+        sx={{ fontWeight: "10" }}
         pt={4}
         pb={4}
         align="center"
@@ -298,7 +288,11 @@ export function Home() {
       <div align="center">
         <Button align="center" variant="contained" size="large">
           <Link
-            style={{ textDecoration: "none", color: "white", fontSize: "2rem" }}
+            style={{
+              textDecoration: "none",
+              color: "white",
+              fontSize: "1.5rem",
+            }}
             to={"/assessment"}
           >
             Take the assessment

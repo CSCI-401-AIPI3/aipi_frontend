@@ -36,6 +36,9 @@ export function Signup() {
           setCreatedAccount(true);
         }
         return response;
+      })
+      .catch((e) => {
+        console.log("SIGNUP - REGISTER", e);
       });
   };
 

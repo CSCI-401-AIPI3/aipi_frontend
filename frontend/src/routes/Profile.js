@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, Divider, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
   ComposedChart,
@@ -27,8 +27,11 @@ export function Profile() {
       .then((response) => {
         console.log(response);
         setLoggedIn(response.status === 200);
+      })
+      .catch((e) => {
+        console.log("PROFILE - AUTH", e);
       });
-  });
+  }, []);
 
   // fetch("/getUserScores")
   //   .then((response) => response.json())
@@ -80,6 +83,12 @@ export function Profile() {
         It is important to consider both individual growth in specific
         categories as well as holistic growth across all categories.
       </Typography>
+      <Typography pb={4}>
+        As you change your answers, your score, your awareness of your team's
+        technical maturity, and your team's overall technical competency may
+        improve.
+      </Typography>
+      <Typography pb={4}>Technical Maturity Level: Managed</Typography>
       <ComposedChart width={730} height={250} data={finalReformattedData}>
         <XAxis dataKey="name" />
         <YAxis />
@@ -91,6 +100,7 @@ export function Profile() {
         <Bar dataKey="Networking" barSize={20} fill="#28afb0" />
         <Line type="monotone" dataKey="Average" stroke="#f4d35e" />
       </ComposedChart>
+      <Divider />
       <Button>
         <Link
           style={{ textDecoration: "none", color: "gray" }}
@@ -104,7 +114,7 @@ export function Profile() {
 
   const loggedOutView = (
     <Link style={{ textDecoration: "none", color: "gray" }} to={"/login"}>
-      Please log in to view the assessment
+      Please log in to view your profile
     </Link>
   );
 

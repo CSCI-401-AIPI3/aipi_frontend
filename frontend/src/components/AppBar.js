@@ -25,11 +25,14 @@ export function AppBar(props) {
         .then((response) => {
           console.log(response);
           setLoggedIn(response.status === 200);
+        })
+        .catch((e) => {
+          console.log("NAVBAR - AUTH", e);
         });
     } catch (error) {
       console.log(error);
     }
-  });
+  }, []);
 
   const profileStatusButton = isLoggedIn ? (
     <Button>
@@ -47,6 +50,9 @@ export function AppBar(props) {
             .then((response) => {
               console.log(response);
               setLoggedIn(response.status === 200);
+            })
+            .catch((e) => {
+              console.log("NAVBAR - LOG OUT", e);
             });
         }}
       >
