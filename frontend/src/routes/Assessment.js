@@ -9,15 +9,17 @@ import axios from "axios";
 export function Assessment() {
   let [isLoggedIn, setLoggedIn] = useState(false);
   let [questionsList, setQuestionsList] = useState([]);
-  let [answersList, setAnswersList] = useState([]);
+  let [answersList, setAnswersList] = useState({});
 
-  const changeAnswerValue = (questionId, answers) => {
+  const changeAnswerValue = (questionID, answers) => {
     let newAnswersList = answersList;
-    newAnswersList[questionId] = answers;
+    newAnswersList[questionID] = answers;
     setAnswersList(newAnswersList);
   };
 
   const submitAnswers = () => {
+    console.log(answersList);
+
     axios
       .post("http://localhost:3008/submitUserAnswers", {
         headers: {
@@ -56,6 +58,7 @@ export function Assessment() {
       });
 
     // Retrieves the list of questions from the database
+    // Data includes: questionID, category, questionString, answerType, answerOptionsList, weight, visible
     axios
       .get("http://localhost:3008/questions", {
         headers: {
@@ -116,9 +119,19 @@ export function Assessment() {
 
     categoryQuestions.forEach((question, i) => {
       if (question.answerType === "SC") {
-        categoryComponents.push(<SingleSelectQuestion props={question} />);
+        categoryComponents.push(
+          <SingleSelectQuestion
+            question={question}
+            callback={changeAnswerValue}
+          />
+        );
       } else if (question.answerType === "MC") {
-        categoryComponents.push(<MultiSelectQuestion props={question} />);
+        categoryComponents.push(
+          <MultiSelectQuestion
+            question={question}
+            callback={changeAnswerValue}
+          />
+        );
       }
     });
   });

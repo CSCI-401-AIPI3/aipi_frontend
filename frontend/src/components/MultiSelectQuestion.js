@@ -5,17 +5,41 @@ import {
   FormControlLabel,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 
-export function MultiSelectQuestion({ props }) {
+export function MultiSelectQuestion({ question, callback }) {
+  const [checkedList, setCheckedList] = useState([]);
+
+  callback(question.questionID, checkedList);
+
+  const handleCheckboxChange = (event) => {
+    let newCheckedList = checkedList;
+    if (event.target.checked) {
+      newCheckedList.push(event.target.name);
+    } else {
+      newCheckedList = newCheckedList.filter(
+        (item) => item != event.target.name
+      );
+    }
+    setCheckedList(newCheckedList);
+    callback(question.questionID, newCheckedList);
+  };
+
   return (
     <Container sx={{ my: 4 }}>
       <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
-        {props.questionString}
+        {question.questionString}
       </Typography>
       <FormGroup>
-        {props.answerOptionsList.map((answer, i) => {
+        {question.answerOptionsList.map((answer, i) => {
           return (
-            <FormControlLabel control={<Checkbox />} label={answer} key={i} />
+            <FormControlLabel
+              control={
+                <Checkbox onChange={handleCheckboxChange} name={answer} />
+              }
+              label={answer}
+              key={i}
+            />
           );
         })}
       </FormGroup>

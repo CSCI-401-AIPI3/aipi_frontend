@@ -8,23 +8,25 @@ import {
   Typography,
 } from "@mui/material";
 
-export function SingleSelectQuestion({ props }) {
+export function SingleSelectQuestion({ question, callback }) {
   return (
     <Container sx={{ my: 4 }}>
       <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
-        {props.questionString}
+        {question.questionString}
       </Typography>
-      <FormControl>
+      <FormControl required={true}>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue="female"
           name="radio-buttons-group"
         >
-          {props.answerOptionsList.map((answer, i) => {
+          {question.answerOptionsList.map((answer, i) => {
             return (
               <FormControlLabel
                 value={answer}
-                control={<Radio />}
+                control={
+                  <Radio onChange={callback(question.questionID, [answer])} />
+                }
                 label={answer}
                 key={i}
               />
