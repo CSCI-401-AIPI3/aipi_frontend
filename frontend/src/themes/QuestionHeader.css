@@ -1,0 +1,16 @@
+.form-question-headline{
+    font-size: 16pt;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  
+  .form-question-subtext{
+    font-size: 16pt;
+    padding-top: 10px;
+    padding-left: 15px;
+  }
+  
+  .form-question-fineprint{
+    font-size: 10pt;
+    padding-left: 15px
+  }

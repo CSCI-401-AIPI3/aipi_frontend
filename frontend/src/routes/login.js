@@ -34,6 +34,9 @@ export function Login() {
           setSignedInAccount(true);
         }
         return response.json();
+      })
+      .catch((e) => {
+        console.log("LOGIN - AUTH", e);
       });
   };
 

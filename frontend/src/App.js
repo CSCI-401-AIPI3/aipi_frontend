@@ -9,6 +9,7 @@ import { Profile } from "./routes/Profile.js";
 import { Assessment } from "./routes/Assessment.js";
 import { AppBar } from "./components/AppBar.js";
 import { Footer } from "./components/Footer.js";
+import ExpandingCard from "./components/ExpandingCard";
 import { Login } from "./routes/Login.js";
 import { Signup } from "./routes/Signup";
 import axios from "axios";

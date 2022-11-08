@@ -2,13 +2,45 @@ import { Button, Container, Typography } from "@mui/material";
 import { MultiSelectQuestion } from "../components/MultiSelectQuestion";
 import { SingleSelectQuestion } from "../components/SingleSelectQuestion";
 import { Link } from "react-router-dom";
+import ExpandingCard from "../components/ExpandingCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 export function Assessment() {
   let [isLoggedIn, setLoggedIn] = useState(false);
+  let [questionsList, setQuestionsList] = useState([]);
+  let [answersList, setAnswersList] = useState({});
+
+  const changeAnswerValue = (questionID, answers) => {
+    let newAnswersList = answersList;
+    newAnswersList[questionID] = answers;
+    setAnswersList(newAnswersList);
+  };
+
+  const submitAnswers = () => {
+    console.log(answersList);
+
+    axios
+      .post("http://localhost:3008/submitUserAnswers", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: {
+          userAnswers: answersList,
+        },
+      })
+      .then((response) => {
+        console.log("SUBMIT ANSWERS", response);
+      })
+      .catch((e) => {
+        console.log("SUBMIT ANSWERS", e);
+      });
+  };
 
   useEffect(() => {
+    // Determine if user is logged in
+    // If user is logged in, the logged in state is set to true. This will display the questions
     axios
       .get("http://localhost:3008/", {
         headers: {
@@ -17,156 +49,89 @@ export function Assessment() {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("IN AUTH", response);
         setLoggedIn(response.status === 200);
+      })
+      .catch((e) => {
+        console.log("ASSESSMENT - AUTH", e);
+        setLoggedIn(false);
       });
-  });
+
+    // Retrieves the list of questions from the database
+    // Data includes: questionID, category, questionString, answerType, answerOptionsList, weight, visible
+    axios
+      .get("http://localhost:3008/questions", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setQuestionsList(response.data);
+      })
+      .catch((e) => {
+        console.log("ASSESSMENT - QUESTIONS", e);
+      });
+
+    // Retrieves any answers a user has already submitted
+    axios
+      .get("/getUserAnswers", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log("ASSESSMENT - USER ANSWERS", e);
+      });
+  }, []);
 
   const categoriesList = [
-    "Frontend",
-    "Backend",
-    "Networking",
-    "Data",
-    "Security",
-    "Tools",
-    "People",
-    "Processes",
-    "Infrastructure Fit",
+    { name: "Frontend", db_name: "FRONTEND" },
+    { name: "Backend", db_name: "BACKEND" },
+    { name: "Networking", db_name: "NETWORKING" },
+    { name: "Data", db_name: "DATA_AND_ML" },
+    { name: "Security", db_name: "SECURITY" },
+    { name: "Tools", db_name: "TOOLS" },
+    { name: "People", db_name: "PEOPLE" },
+    { name: "Processes", db_name: "PROCESSES" },
+    { name: "Infrastructure Fit", db_name: "INFRASTRUCTURE_FIT" },
   ];
 
-  // fetch("http://localhost:3008/questions")
-  //   .then((response) => {
-  //     console.log(response);
-  //     return response.json();
-  //   })
-  //   .then((data) => console.log(data));
-
-  // fetch("/getUserAnswers")
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
-
-  const questionsList = [
-    {
-      id: 1,
-      category: "Frontend",
-      questionString: "How do users interact with the website?",
-      answerType: "multipleChoice",
-      answerOptionsList: [
-        "Chat-bots",
-        "Data entry",
-        "Data viewing",
-        "Routing to third-party software",
-      ],
-    },
-    {
-      id: 2,
-      category: "Backend",
-      questionString:
-        "Does your company use test coverage, code coverage, or both?",
-      answerType: "multipleChoice",
-      answerOptionsList: ["Test coverage", "Code coverage"],
-    },
-    {
-      id: 3,
-      category: "Networking",
-      questionString:
-        "Is application availability (e.g. downtime of user-facing apps, downtime of internal APIs) being continuously monitored?",
-      answerType: "singleChoice",
-      answerOptionsList: ["Yes", "No"],
-    },
-    {
-      id: 4,
-      category: "Data",
-      questionString: "How is most data generated in your company?",
-      answerType: "singleChoice",
-      answerOptionsList: [
-        "Manual inputs from the field",
-        "Automatically from business apps",
-        "Machine learning triggers",
-      ],
-    },
-    {
-      id: 5,
-      category: "Security",
-      questionString:
-        "Has your company experienced any phishing, ransomware, DDoS, or Injection attacks in the past year?",
-      answerType: "singleChoice",
-      answerOptionsList: [
-        "Yes, the company has experienced attacks this year and stopped it",
-        "Yes, the company has experienced attacks this year but did not stop it.",
-        "No, but the company has experienced attacks in the past.",
-        "No, the company has never experienced an attack.",
-      ],
-    },
-    {
-      id: 6,
-      category: "Tools",
-      questionString:
-        "What tools does your company use that you are not completely satisfied with?",
-      answerType: "multipleChoice",
-      answerOptionsList: [
-        "Task management",
-        "Deployment management, including A/B testing",
-        "Code management",
-        "Testing infrastructure",
-        "Data montioring",
-      ],
-    },
-    {
-      id: 7,
-      category: "People",
-      questionString:
-        "Do you have a data team responsible for owning the company's data tooling and strategy?",
-      answerType: "singleChoice",
-      answerOptionsList: [
-        "Yes, there is a data team responsible for owning the company’s data tooling and strategy",
-        "No, but some software engineers’ job descriptions also include monitoring the company’s data tooling and strategy",
-        "No, there is no data tooling and strategy",
-      ],
-    },
-    {
-      id: 8,
-      category: "Processes",
-      questionString:
-        "Is there a company-wide data, software, and security strategy?",
-      answerType: "singleChoice",
-      answerOptionsList: [
-        "Yes, and all three are being met at pace",
-        "Yes, but at least one department seems to be behind schedule",
-        "No, there is no company-wide technology strategy",
-      ],
-    },
-    {
-      id: 9,
-      category: "Infrastructure Fit",
-      questionString: "Is there a long engineering backlog?",
-      answerType: "singleChoice",
-      answerOptionsList: [
-        "Yes, the engineering backlog is growing faster than it is being addressed",
-        "Yes, the engineering backlog grows quickly but it is addressed based on user-priorities",
-        "No, the engineering backlog is typically empty",
-      ],
-    },
-  ];
+  // data is the struct, so check console log to figure out struct questions
 
   let categoryComponents = [];
 
   categoriesList.forEach((category, index) => {
     categoryComponents.push(
       <Typography variant="h5" key={index}>
-        {category}
+        {category.name}
       </Typography>
     );
 
     const categoryQuestions = questionsList.filter(
-      (question) => question.category === category
+      (question) => question.category === category.db_name
     );
 
     categoryQuestions.forEach((question, i) => {
-      if (question.answerType === "singleChoice") {
-        categoryComponents.push(<SingleSelectQuestion props={question} />);
-      } else if (question.answerType === "multipleChoice") {
-        categoryComponents.push(<MultiSelectQuestion props={question} />);
+      if (question.answerType === "SC") {
+        categoryComponents.push(
+          <SingleSelectQuestion
+            question={question}
+            callback={changeAnswerValue}
+          />
+        );
+      } else if (question.answerType === "MC") {
+        categoryComponents.push(
+          <MultiSelectQuestion
+            question={question}
+            callback={changeAnswerValue}
+          />
+        );
       }
     });
   });
@@ -174,7 +139,7 @@ export function Assessment() {
   const loggedInView = (
     <>
       {categoryComponents}
-      <Button>
+      <Button onClick={submitAnswers}>
         <Link style={{ textDecoration: "none", color: "gray" }} to={"/profile"}>
           Submit
         </Link>
@@ -183,13 +148,17 @@ export function Assessment() {
   );
 
   const loggedOutView = (
-    <Link style={{ textDecoration: "none", color: "gray" }} to={"/login"}>
-      Please log in to view the assessment
-    </Link>
+    <>
+      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
+        You are not logged in.
+      </Typography>
+      <Link style={{ textDecoration: "none", color: "gray" }} to={"/login"}>
+        Please log in to view the assessment
+      </Link>
+    </>
   );
 
   // render categoryComponents only if the user is logged in
-  console.log("isloggedin", isLoggedIn);
   const assessmentBody = isLoggedIn ? loggedInView : loggedOutView;
 
   return (
