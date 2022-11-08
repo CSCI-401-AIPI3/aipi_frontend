@@ -12,6 +12,7 @@ import { Footer } from "./components/Footer.js";
 import ExpandingCard from "./components/ExpandingCard";
 import { Login } from "./routes/Login.js";
 import { Signup } from "./routes/Signup";
+import { Admin } from "./routes/Admin.js";
 import axios from "axios";
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
         <Route
           path="/profile"
           element={<React.Suspense children={<Profile />} />}
+        />
+        <Route
+          path="/admin"
+          element={<React.Suspense children={<Admin />} />}
         />
       </Routes>
       <Footer />
