@@ -13,8 +13,32 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+function AboveBelow(industryAverage, userScore, category) {
+  if (userScore > industryAverage) {
+    return (
+      <Typography>
+        Your {category} score is ABOVE the industry average
+      </Typography>
+    );
+  } else if (userScore < industryAverage) {
+    return (
+      <Typography>
+        Your {category} score is BELOW the industry average
+      </Typography>
+    );
+  } else {
+    return (
+      <Typography>
+        Your {category} score matches the industry average
+      </Typography>
+    );
+  }
+}
+
 export function Profile() {
   let [isLoggedIn, setLoggedIn] = useState(false);
+  let [userScores, setUserScores] = useState([]);
+  let [industryAverages, setIndustryAverages] = useState([]);
 
   useEffect(() => {
     axios
@@ -31,31 +55,74 @@ export function Profile() {
       .catch((e) => {
         console.log("PROFILE - AUTH", e);
       });
+
+    axios
+      .get("http://localhost:3008/getUserScores", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("PROFILE - USER SCORE repsonse", response.data);
+        setUserScores(response.data);
+      })
+      .catch((e) => {
+        console.log("PROFILE - USER SCORES error", e);
+      });
+
+    axios
+      .get("http://localhost:3008/getIndustryAverages", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("PROFILE - INDUSTRY AVREAGES response", response.data);
+        setIndustryAverages(response.data);
+      })
+      .catch((e) => {
+        console.log("PROFILE - INDUSTRY AVERAGES error", e);
+      });
   }, []);
 
-  // fetch("/getUserScores")
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
+  const db_cat_to_display_cat = {
+    FRONTEND: "Frontend",
+    BACKEND: "Backend",
+    NETWORKING: "Networking",
+    DATA_AND_ML: "Data",
+    SECURITY: "Security",
+    TOOLS: "Tools",
+    PEOPLE: "People",
+    PROCESSES: "Processes",
+    INFRASTRUCTURE_FIT: "Infrastructure Fit",
+  };
 
-  const data = [
-    { Category: "Frontend", Score: 7.0, Timestamp: 1 },
-    { Category: "Backend", Score: 19.0, Timestamp: 1 },
-    { Category: "Networking", Score: 23.0, Timestamp: 1 },
-    { Category: "Frontend", Score: 55.0, Timestamp: 2 },
-    { Category: "Backend", Score: 33.0, Timestamp: 2 },
-    { Category: "Networking", Score: 45.0, Timestamp: 2 },
-    { Category: "Frontend", Score: 70.0, Timestamp: 3 },
-    { Category: "Backend", Score: 40.0, Timestamp: 3 },
-    { Category: "Networking", Score: 50.0, Timestamp: 3 },
-  ];
+  const timestamps = [];
+  userScores.forEach((dataPoint) => {
+    if (!timestamps.includes(dataPoint.timestamp)) {
+      timestamps.push(dataPoint.timestamp);
+    }
+  });
+  timestamps.sort();
+  const lastTimestamp = timestamps[timestamps.length - 1];
+  const timestampsMap = new Map();
+  timestamps.forEach((timestamp, index) => {
+    timestampsMap.set(timestamp, index);
+  });
 
   let reformattedData = {};
-  data.forEach((dataPoint) => {
-    if (!(dataPoint.Timestamp in reformattedData)) {
-      reformattedData[dataPoint.Timestamp] = {};
+  userScores.forEach((dataPoint) => {
+    const ts = timestampsMap.get(dataPoint.timestamp);
+    if (!(ts in reformattedData)) {
+      reformattedData[ts] = {};
     }
-    reformattedData[dataPoint.Timestamp][dataPoint.Category] = dataPoint.Score;
+    reformattedData[ts][db_cat_to_display_cat[dataPoint.category]] =
+      dataPoint.score;
   });
+
+  console.log("REF DATA", reformattedData);
 
   let finalReformattedData = [];
   for (let [time, categoryScores] of Object.entries(reformattedData)) {
@@ -89,6 +156,18 @@ export function Profile() {
         improve.
       </Typography>
       <Typography pb={4}>Technical Maturity Level: Managed</Typography>
+      {industryAverages.map((dataPoint) => {
+        return AboveBelow(
+          dataPoint.score,
+          userScores.filter((score) => {
+            return (
+              score.category === db_cat_to_display_cat[dataPoint.category] &&
+              score.timestamp === lastTimestamp
+            );
+          }),
+          db_cat_to_display_cat[dataPoint.category]
+        );
+      })}
       <ComposedChart width={730} height={250} data={finalReformattedData}>
         <XAxis dataKey="name" />
         <YAxis />
@@ -98,12 +177,18 @@ export function Profile() {
         <Bar dataKey="Frontend" barSize={20} fill="#fa7921" />
         <Bar dataKey="Backend" barSize={20} fill="#19647e" />
         <Bar dataKey="Networking" barSize={20} fill="#28afb0" />
+        <Bar dataKey="Infrastructure Fit" barSize={20} fill="#2DF3FF" />
+        <Bar dataKey="Security" barSize={20} fill="#19A8D1" />
+        <Bar dataKey="People" barSize={20} fill="#4979D3" />
+        <Bar dataKey="Tools" barSize={20} fill="#00C2DA" />
+        <Bar dataKey="Processes" barSize={20} fill="#FF8F00" />
+        <Bar dataKey="Data" barSize={20} fill="#5B6EFF" />
         <Line type="monotone" dataKey="Average" stroke="#f4d35e" />
       </ComposedChart>
       <Divider />
-      <Button>
+      <Button variant="contained">
         <Link
-          style={{ textDecoration: "none", color: "gray" }}
+          style={{ textDecoration: "none", color: "white" }}
           to={"/assessment"}
         >
           Edit your assessment answers

@@ -32,6 +32,21 @@ export function Assessment() {
       })
       .then((response) => {
         console.log("SUBMIT ANSWERS", response);
+
+        axios
+          .post("http://localhost:3008/updateIndustryAverages", {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            data: response.data,
+          })
+          .then((response) => {
+            console.log("UPDATE INDUSTRY AVERAGES", response);
+          })
+          .catch((e) => {
+            console.log("UPDATE INDUSTRY AVERAGES", e);
+          });
       })
       .catch((e) => {
         console.log("SUBMIT ANSWERS", e);
