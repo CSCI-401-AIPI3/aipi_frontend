@@ -46,7 +46,7 @@ export function Admin() {
       });
 
     axios
-      .get("http://localhost:3008/admin/getUncontactedUsers", {
+      .get("http://localhost:3008/getUncontactedUsers", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export function Admin() {
       });
 
     axios
-      .get("http://localhos:3008/admiin/getUserRequestsHelp", {
+      .get("http://localhos:3008/getUserRequestsHelp", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
