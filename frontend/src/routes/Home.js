@@ -85,8 +85,28 @@ export function Home() {
         </Typography>
       </Box>
       <Grid container spacing={4} sx={{paddingTop:"2%"}}>
+        
+        <Grid item md={6}>
+        <CardMedia
+              component="img"
+              height="500"
+              image="/images/side.webp"
+        />
+        </Grid>
+        <Grid item md={6}>
+        <CardMedia
+            
+        />
+        Benefits of taking assessment/logging in. Trying to make this a carousel.
+          take the assessment and view your results
+          talk with a professional on goals/metrics
+          track progress throughout development, edit as needed
+        </Grid>
+        
+      </Grid>
+      <Grid container spacing={4} sx={{paddingTop:"2%"}}>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888" }}>
             <CardMedia
               component="img"
               height="250"
@@ -108,8 +128,8 @@ export function Home() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+        <Grid item md={4} >
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -131,7 +151,7 @@ export function Home() {
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -153,7 +173,7 @@ export function Home() {
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -169,13 +189,13 @@ export function Home() {
                 Security
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-                Investigates cybersecurity and user account access
+                Investigates cybersecurity practices and user account access
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400 , backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400 , backgroundColor: "#E6F3FC",boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -188,16 +208,16 @@ export function Home() {
                 component="div"
                 align="center"
               >
-                Data and Machine Learning
+                Data 
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-                Analyzes how data is cleansed and accessed by users
+                Analyzes how data is cleansed and accessed by users, with foucs on machine learning
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -213,13 +233,13 @@ export function Home() {
                 Tools
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-                Assesses team management techniques
+                Assesses executive structure and team management techniques 
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -235,13 +255,13 @@ export function Home() {
                 People
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-               Investigates employee knowledge and firm hierarchy
+               Investigates internal employee knowledge and firm employee hierarchy 
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC",boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -257,13 +277,13 @@ export function Home() {
                 Processes
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-              Focuses on people and team engagements in HR
+              Focuses on utilizing human resources and team engagements
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item md={4}>
-          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC", border: 0}}>
+          <Card sx={{ maxWidth: 400, backgroundColor: "#E6F3FC",boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888"}}>
             <CardMedia
               component="img"
               height="250"
@@ -276,10 +296,10 @@ export function Home() {
                 component="div"
                 align="center"
               >
-                Infrastucture Problem Fit
+                Infrastucture-Problem Fit
               </Typography>
               <Typography variant="h5" color="text.secondary" align="center">
-                Analyses synergy between business practices and customer needs
+                Analyses synergy business practices and customer needs
               </Typography>
             </CardContent>
           </Card>
@@ -287,7 +307,6 @@ export function Home() {
       </Grid>
 
       <Divider />
-
       <Typography
         variant="h4"
         pt={4}

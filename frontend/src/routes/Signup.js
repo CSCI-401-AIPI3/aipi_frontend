@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -39,6 +40,9 @@ export function Signup() {
       })
       .catch((e) => {
         console.log("SIGNUP - REGISTER", e);
+        if(e.response) console.log(e.response.data);
+        <Alert severity="error">This is an error alert — check it out!</Alert>
+
       });
   };
 
