@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import ExpandingCard from "../components/ExpandingCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../components/AuthContext";
 
 export function Assessment() {
-  let [isLoggedIn, setLoggedIn] = useState(false);
   let [questionsList, setQuestionsList] = useState([]);
   let [answersList, setAnswersList] = useState({});
+
+  const { auth } = useAuth();
 
   const changeAnswerValue = (questionID, answers) => {
     let newAnswersList = answersList;
@@ -54,24 +56,6 @@ export function Assessment() {
   };
 
   useEffect(() => {
-    // Determine if user is logged in
-    // If user is logged in, the logged in state is set to true. This will display the questions
-    axios
-      .get("http://localhost:3008/", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log("IN AUTH", response);
-        setLoggedIn(response.status === 200);
-      })
-      .catch((e) => {
-        console.log("ASSESSMENT - AUTH", e);
-        setLoggedIn(false);
-      });
-
     // Retrieves the list of questions from the database
     // Data includes: questionID, category, questionString, answerType, answerOptionsList, weight, visible
     axios
@@ -174,7 +158,7 @@ export function Assessment() {
   );
 
   // render categoryComponents only if the user is logged in
-  const assessmentBody = isLoggedIn ? loggedInView : loggedOutView;
+  const assessmentBody = auth ? loggedInView : loggedOutView;
 
   return (
     <Container sx={{ my: 4 }}>

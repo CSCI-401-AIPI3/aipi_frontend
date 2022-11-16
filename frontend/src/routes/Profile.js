@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../components/AuthContext";
 
 function AboveBelow(industryAverage, userScore, category) {
   if (userScore > industryAverage) {
@@ -38,29 +39,16 @@ function AboveBelow(industryAverage, userScore, category) {
 }
 
 export function Profile() {
-  let [isLoggedIn, setLoggedIn] = useState(false);
   let [userScores, setUserScores] = useState([]);
   let [industryAverages, setIndustryAverages] = useState([]);
+
+  const { auth } = useAuth();
+
   let currentAverage = 0;
   let maturity = "";
   let maturityDescription = "";
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3008/", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setLoggedIn(response.status === 200);
-      })
-      .catch((e) => {
-        console.log("PROFILE - AUTH", e);
-      });
-
     axios
       .get("http://localhost:3008/getUserScores", {
         headers: {
@@ -222,7 +210,7 @@ export function Profile() {
         );
       })}
       <Divider mt={4} />
-      <Grid item container xs={12}>
+      <Grid item container xs={12} direction="column">
         <Grid item pt={4}>
           <ComposedChart width={730} height={250} data={finalReformattedData}>
             <XAxis dataKey="name" />
@@ -254,7 +242,7 @@ export function Profile() {
         </Grid>
         <Grid item pt={2}>
           <Button mt={4} variant="contained" onClick={requestHelp}>
-            Find out how you can improve your team's technical maturity
+            Request help from a mentor
           </Button>
         </Grid>
       </Grid>
@@ -268,7 +256,7 @@ export function Profile() {
   );
 
   // render categoryComponents only if the user is logged in
-  const profileBody = isLoggedIn ? loggedInView : loggedOutView;
+  const profileBody = auth ? loggedInView : loggedOutView;
 
   return <Container sx={{ my: 4 }}>{profileBody}</Container>;
 }

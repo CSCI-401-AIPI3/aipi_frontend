@@ -1,20 +1,26 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Box,
+  Typography,
+  Container,
+  Alert,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../components/AuthContext";
 
 const theme = createTheme();
 
 export function Login() {
+  const { setAuth, user } = useAuth();
+
   const [signedInAccount, setSignedInAccount] = React.useState(false);
 
-  const handleSubmit = (event) => {
+  const login = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const passData = {
@@ -31,12 +37,15 @@ export function Login() {
       })
       .then((response) => {
         if (response.status === 200) {
+          setAuth(true);
           setSignedInAccount(true);
         }
-        return response.json();
+        return response;
       })
       .catch((e) => {
-        console.log("LOGIN - AUTH", e);
+        console.log("SIGNUP - REGISTER", e);
+        if (e.response) console.log(e.response.data);
+        <Alert severity="error">This is an error alert — check it out!</Alert>;
       });
   };
 
@@ -67,12 +76,7 @@ export function Login() {
           <Typography component="h1" variant="h3">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

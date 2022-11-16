@@ -4,68 +4,36 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "./AuthContext";
 
 export function AppBar(props) {
   const { sx, ...other } = props;
 
-  let [isLoggedIn, setLoggedIn] = useState(false);
+  const { setAuth, user } = useAuth();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    try {
-      axios
-        .get("http://localhost:3008/", {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          setLoggedIn(response.status === 200);
-        })
-        .catch((e) => {
-          console.log("NAVBAR - AUTH", e);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  const profileStatusButton = isLoggedIn ? (
-    <Button>
-      <Link
-        style={{ textDecoration: "none", color: "gray" }}
-        to={"/"}
-        onClick={() => {
-          axios
-            .post("http://localhost:3008/logout", {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            })
-            .then((response) => {
-              console.log(response);
-              setLoggedIn(response.status === 200);
-            })
-            .catch((e) => {
-              console.log("NAVBAR - LOG OUT", e);
-            });
-        }}
-      >
-        Logout
-      </Link>
-    </Button>
-  ) : (
-    <Button>
-      <Link style={{ textDecoration: "none", color: "gray" }} to={"login"}>
-        Login
-      </Link>
-    </Button>
-  );
+  const logout = () => {
+    axios
+      .post("http://localhost:3008/logout", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          setAuth(false);
+          navigate("/login");
+        }
+      })
+      .catch((e) => {
+        console.log("NAVBAR - LOG OUT", e);
+      });
+  };
 
   return (
     <AppBarBase
@@ -82,7 +50,15 @@ export function AppBar(props) {
         </Typography>
 
         <Typography sx={{ fontSize: "4rem" }} variant="h2">
-          {profileStatusButton}
+          <Button>
+            <Link
+              style={{ textDecoration: "none", color: "gray" }}
+              to={"/"}
+              onClick={logout}
+            >
+              Logout
+            </Link>
+          </Button>
         </Typography>
       </Toolbar>
     </AppBarBase>

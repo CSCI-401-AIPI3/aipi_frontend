@@ -8,20 +8,24 @@ import { Home } from "./routes/Home.js";
 import { Profile } from "./routes/Profile.js";
 import { Assessment } from "./routes/Assessment.js";
 import { AppBar } from "./components/AppBar.js";
+import { NotAuthAppBar } from "./components/NotAuthAppBar.js";
 import { Footer } from "./components/Footer.js";
 import ExpandingCard from "./components/ExpandingCard";
 import { Login } from "./routes/Login.js";
 import { Signup } from "./routes/Signup";
 import { Admin } from "./routes/Admin.js";
 import axios from "axios";
+import { useAuth } from "./components/AuthContext";
 
 function App() {
   axios.defaults.withCredentials = true;
 
+  const { auth } = useAuth();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="fixed" />
+      {auth ? <AppBar position="fixed" /> : <NotAuthAppBar position="fixed" />}
       <Toolbar />
       <Routes>
         <Route

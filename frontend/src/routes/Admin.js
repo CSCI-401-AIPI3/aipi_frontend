@@ -1,33 +1,17 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../components/AuthContext";
 
 export function Admin() {
-  let [isLoggedIn, setLoggedIn] = useState(false);
   let [questionsList, setQuestionsList] = useState([]);
   let [uncontactedUsers, setUncontactedUsers] = useState([]);
   let [usersWantingHelp, setUsersWantingHelp] = useState([]);
 
-  useEffect(() => {
-    // Determine if user is logged in
-    // If user is logged in, the logged in state is set to true. This will display the questions
-    axios
-      .get("http://localhost:3008/", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log("IN AUTH", response);
-        setLoggedIn(response.status === 200);
-      })
-      .catch((e) => {
-        console.log("ADMIN - AUTH", e);
-        setLoggedIn(false);
-      });
+  const { auth } = useAuth();
 
+  useEffect(() => {
     // Retrieves the list of questions from the database
     // Data includes: questionID, category, questionString, answerType, answerOptionsList, weight, visible
     axios
@@ -46,7 +30,7 @@ export function Admin() {
       });
 
     axios
-      .get("http://localhost:3008/getUncontactedUsers", {
+      .get("http://localhost:3008/admin/getUncontactedUsers", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -61,7 +45,7 @@ export function Admin() {
       });
 
     axios
-      .get("http://localhos:3008/getUserRequestsHelp", {
+      .get("http://localhost:3008/admin/getUserRequestsHelp", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -75,6 +59,26 @@ export function Admin() {
         console.log("ADMIN - USERS REQUESTING HELP", e);
       });
   }, []);
+
+  const hideQuestion = (questionID, visibility) => {
+    axios
+      .post("http://localhost:3008/admin/updateQuestionVisibility", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: {
+          questionID: questionID,
+          visibility: visibility,
+        },
+      })
+      .then((response) => {
+        console.log("HIDE QUESTION", response);
+      })
+      .catch((e) => {
+        console.log("HIDE QUESTION", e);
+      });
+  };
 
   let uncontactedUsersList = [];
 
@@ -151,18 +155,39 @@ export function Admin() {
 
     categoryQuestions.forEach((question, i) => {
       categoryComponents.push(
-        <Typography>{question.questionString}</Typography>
+        <>
+          <Grid item container direction="row" alignItems="center" xs={12}>
+            <Grid item>
+              <Typography>{question.questionString}</Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  hideQuestion(question.questionID, !question.visible);
+                }}
+              >
+                {question.visible ? "Hide" : "Show"}
+              </Button>
+            </Grid>
+          </Grid>
+        </>
       );
     });
   });
 
   const loggedInView = (
     <>
-      <Typography variant="h5">Users Requesting Help</Typography>
+      <Typography variant="h5" pb={4}>
+        Users Requesting Help
+      </Typography>
       {uncontactedsersWantingHelp}
-      <Typography variant="h5">Uncontacted Users</Typography>
+      <Typography variant="h5" pb={4}>
+        Uncontacted Users
+      </Typography>
       {uncontactedUsersList}
-      <Typography variant="h5">Questions List</Typography>
+      <Typography variant="h5" pb={4}>
+        Questions List
+      </Typography>
       {categoryComponents}
     </>
   );
@@ -179,7 +204,7 @@ export function Admin() {
   );
 
   // render categoryComponents only if the user is logged in
-  const adminBody = isLoggedIn ? loggedInView : loggedOutView;
+  const adminBody = auth ? loggedInView : loggedOutView;
 
   return (
     <Container sx={{ my: 4 }}>
