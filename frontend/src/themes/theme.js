@@ -21,4 +21,7 @@ const { palette } = createTheme({
 export const theme = createTheme({
   palette,
   components: components(palette),
+  typography: {
+    fontFamily: ['"Montserrat"', 'League Spartan'].join(',')
+   }
 });
