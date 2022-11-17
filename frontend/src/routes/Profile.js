@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Grid, Typography } from "@mui/material";
+import { Button, Container, Divider, Grid, Typography,Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
   ComposedChart,
@@ -13,6 +13,7 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext";
+import CardMedia from "@mui/material/CardMedia";
 
 function AboveBelow(industryAverage, userScore, category) {
   if (userScore > industryAverage) {
@@ -176,24 +177,34 @@ export function Profile() {
 
   const loggedInView = (
     <>
-      <Typography sx={{ mb: 4, fontSize: "1.25rem" }} variant="h3">
-        Hello and welcome to your profile
+      <Typography sx={{ mb: 4, fontSize: "4.25rem",fontWeight:"bold"}} variant="h2" align="center">
+        Welcome to your Profile
       </Typography>
-      <Typography pb={4}>
+
+      <Box>
+        <CardMedia
+          sx={{ gridArea: "1/1/2/2", height: 320 }}
+          image="../../images/logobig.jpg"
+        />
+        <Container sx={{ gridArea: "1/1/2/2" }}>...</Container>
+      </Box>
+      <Divider pt={10} />
+      
+      <Typography sx={{ fontSize: "3rem", lineHeight: 1}}  pb={1}align="center" paragraph>
         Below, you can find a chart of your organization's progress over time.
-        It is important to consider both individual growth in specific
+        Consider both individual growth in specific
         categories as well as holistic growth across all categories.
       </Typography>
-      <Typography>
-        As you change your answers, your score, your awareness of your team's
+      <Typography sx={{fontSize: "1.5rem", lineHeight:1}}align="center">
+        *As answers change - your score, awareness of your team's
         technical maturity, and your team's overall technical competency may
         improve.
       </Typography>
-      <Typography pt={4} variant="h5">
-        Technical Maturity Level
+      <Typography sx={{fontSize: "3rem"}} pb={1}align="center" pt={4} variant="h5">
+        Technical Maturity Level:
       </Typography>
-      <Typography>{maturity}</Typography>
-      <Typography>{maturityDescription}</Typography>
+      <Typography sx={{fontSize: "3rem", fontWeight:"bold", color:"orange"}} pb={1}align="center" pt={4} variant="h5">{maturity}</Typography>
+      <Typography sx={{fontSize: "2rem"}} pb={1}align="center" pt={4} variant="h5">{maturityDescription}</Typography>
       <Typography pt={4} variant="h5">
         Category-Specific Industry Comparison
       </Typography>

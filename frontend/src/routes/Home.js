@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import "@fontsource/league-spartan";
 
 export function Home() {
   return (
@@ -22,9 +23,10 @@ export function Home() {
       }}
     >
       <Typography
-        sx={{ mb: 1, fontFamily: "Helvetica" }}
+        sx={{ mb: 1 }}
         variant="h2"
         align="center"
+        fontWeight="bold"
       >
         Welcome to AIPI3® Technical Maturity Assessment
       </Typography>
@@ -84,25 +86,72 @@ export function Home() {
           to give a hollistic view of progress.
         </Typography>
       </Box>
-      <Grid container spacing={4} sx={{paddingTop:"2%"}}>
-        
+
+      <Grid container spacing={3} sx={{paddingTop:"2%"}}>
         <Grid item md={6}>
-        <CardMedia
-              component="img"
-              height="500"
-              image="/images/side.webp"
-        />
+          <CardMedia
+                component="img"
+                height="500"
+                image="/images/side.webp"
+          />
         </Grid>
         <Grid item md={6}>
-        <CardMedia
-            
-        />
-        Benefits of taking assessment/logging in. Trying to make this a carousel.
-          take the assessment and view your results
-          talk with a professional on goals/metrics
-          track progress throughout development, edit as needed
+          <Typography
+            sx={{ fontWeight: "bold" }}
+            variant="h3"
+            align="center"
+            color="black"
+            gutterBottom
+          >
+            User Benefits
+          </Typography>
+          <Grid container spacing={1} sx={{}}>
+            <Grid item md={12}>
+              <Card sx={{backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888" }}>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    color="text.primary"
+                    align="center"
+                  >
+                    View how your company's technical implementation stands out
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item md={12}>
+            <Card sx={{backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888" }}>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    color="text.primary"
+                    align="center"
+                  >
+                    Talk with an AIPI3 consultant on metrics/goals
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item md={12}>
+            <Card sx={{backgroundColor: "#E6F3FC", boxShadow: "5px 5px 10px rgba(0,0,0,0.5)",border: 1,borderColor:"#888888" }}>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    color="text.primary"
+                    align="center"
+                  >
+                    Track progress throughout change development
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         </Grid>
-        
+
+     
       </Grid>
       <Grid container spacing={4} sx={{paddingTop:"2%"}}>
         <Grid item md={4}>
@@ -316,7 +365,7 @@ export function Home() {
         paragraph
       >
         Completing the assessment will also allow one of our own consulting
-        professionals to reach and aid your company's technical maturity
+        professionals to reach out and aid your company's technical maturity
         process.
       </Typography>
       <div align="center">
